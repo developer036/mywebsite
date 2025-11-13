@@ -1,0 +1,156 @@
+/* ---------- Reset & base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body { height: 100%; }
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, #0b1020 0%, #0f1724 60%, #081019 100%);
+  color: #e6eef8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  background: linear-gradient(90deg, rgba(255,86,136,0.12), rgba(102,78,255,0.12));
+  padding: 36px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+}
+.header-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+.brand {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #fff;
+}
+.tagline {
+  margin-top: 6px;
+  color: #cfe8ff;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+/* ---------- Main container: side-by-side layout ---------- */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 28px;
+  align-items: stretch;
+  justify-content: center;
+  /* allow wrapping on narrow screens */
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+
+/* If viewport too narrow, allow wrapping (JS not needed). */
+@media (max-width: 1080px) {
+  .container { flex-wrap: wrap; gap: 22px; }
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: 14px;
+  width: 360px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+}
+
+/* hover lift + neon rim */
+.card:hover {
+  transform: translateY(-12px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(2,6,23,0.75), 0 0 30px rgba(255,86,136,0.09);
+  border-color: rgba(255,86,136,0.18);
+}
+
+/* Poster area */
+.card-media {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,86,136,0.03), rgba(102,78,255,0.03));
+}
+.poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .45s ease;
+}
+.card:hover .poster { transform: scale(1.04); }
+
+/* Body */
+.card-body {
+  padding: 20px 20px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #dbeeff;
+}
+.card-title {
+  font-size: 1.15rem;
+  color: #ffd6eb;
+  margin-bottom: 4px;
+}
+.meta {
+  font-size: 0.86rem;
+  color: #bcd7ff;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+/* Headings inside card */
+.card-body h3 {
+  font-size: 0.96rem;
+  margin-top: 8px;
+  color: #fff;
+}
+
+/* Paragraphs & lists */
+.card-body p {
+  font-size: 0.94rem;
+  color: #d3e9ff;
+  opacity: 0.95;
+}
+.card-body ul {
+  margin-left: 16px;
+  margin-top: 6px;
+  color: #cfe8ff;
+  list-style: disc;
+}
+
+/* fine print / key characters line */
+.card-body p strong { color: #fff; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  margin-top: auto;
+  padding: 18px 20px;
+  background: rgba(6,8,15,0.6);
+  border-top: 1px solid rgba(255,255,255,0.02);
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  color: #9fbef7;
+  font-size: 0.9rem;
+}
+
+/* ---------- Responsive behavior ---------- */
+@media (max-width: 1000px) {
+  .card { width: 90%; max-width: 760px; }
+  .container { flex-direction: column; align-items: center; gap: 24px; }
+}
