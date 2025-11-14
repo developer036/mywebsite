@@ -1,116 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Myanime.com</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For You, My Love ❤️</title>
 
-  <!-- Google Font (optional; requires internet) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-  <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Premium showcase comparing Sword Art Online, A Silent Voice, and I Want to Eat Your Pancreas. Summaries, themes, characters and key facts side by side.">
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        font-family: "Poppins", sans-serif;
+        background: radial-gradient(circle at top, #ffd6e8, #ffc4d6, #ffb8ce);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.7rem;
+        color: #ff3366;
+        text-shadow: 0 0 12px rgba(255, 65, 100, 0.4);
+        animation: fadeIn 2.5s ease-out forwards, float 3.4s infinite alternate ease-in-out;
+        opacity: 0;
+    }
+
+    #message {
+        margin-top: 25px;
+        font-size: 1.5rem;
+        color: #444;
+        font-weight: 300;
+        line-height: 2.1rem;
+        max-width: 700px;
+        opacity: 0;
+        display: inline-block;
+        animation: fadeIn 2s ease-out forwards;
+        animation-delay: 1.8s;
+    }
+
+    /* Typewriter effect */
+    .line {
+        opacity: 0;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 2px solid #ff5f92;
+        width: 0;
+        margin: 10px auto;
+        font-size: 1.5rem;
+        animation: typing 3s steps(40) forwards, blink 0.7s step-end infinite;
+    }
+
+    .line:nth-child(1) { animation-delay: 2.5s; }
+    .line:nth-child(2) { animation-delay: 5.3s; }
+    .line:nth-child(3) { animation-delay: 8s; }
+    .line:nth-child(4) { animation-delay: 10.8s; }
+
+    @keyframes typing {
+        from { width: 0; opacity: 1; }
+        to { width: 100%; opacity: 1; }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes float {
+        from { transform: translateY(0); }
+        to { transform: translateY(-12px); }
+    }
+
+    /* Heart Rain */
+    .heart {
+        position: absolute;
+        font-size: 30px;
+        color: #ff2d55;
+        animation: fall linear infinite;
+        pointer-events: none;
+        opacity: 0.8;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(1000px) rotate(360deg); opacity: 0; }
+    }
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <h1 class="brand">My Favourate Anime</h1>
-      <p class="tagline">Must watch!</p>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/24/audio_b99e916a48.mp3?filename=soft-piano-ambient-124477.mp3" type="audio/mp3">
+</audio>
+
+<div>
+    <h1 id="nameTitle">For You, My Love ❤️</h1>
+
+    <div id="message">
+        <span class="line">Even while you’re sick, you still manage to brighten my day.</span>
+        <span class="line">Take care of yourself, okay?</span>
+        <span class="line">I want to see you glowing again —</span>
+        <span class="line"><b>it's my favorite look on you.</b></span>
     </div>
-  </header>
+</div>
 
-  <main class="container" id="main">
-    <!-- CARD: Sword Art Online -->
-    <article class="card" aria-labelledby="sao-title">
-      <div class="card-media">
-        <img src="images/SAO.jpg" alt="Sword Art Online poster: Kirito and Aincrad" class="poster">
-      </div>
-      <div class="card-body">
-        <h2 id="sao-title" class="card-title">
-        <a href="https://aniwatchtv.to/sword-art-online-2274?ref=search" target="_blank">Sword Art Online</a></h2>        
-        <p class="meta"><strong>Year:</strong> 2012 (anime TV) · <strong>Genres:</strong> Action, Sci-Fi, Romance</p>
+<script>
+// Start music on first user gesture
+document.addEventListener("click", () => {
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.35;
+    music.play();
+}, { once: true });
 
-        <h3>Synopsis</h3>
-        <p>
-          In the near future, players enter a fully immersive VRMMO called <em>Sword Art Online</em>.
-          Trapped in the game by its creator, thousands must clear 100 floors of Aincrad to escape —
-          but death in-game means death in real life. Kirito, a skilled solo player, fights to survive and protect those he cares about.
-        </p>
+// Heart rain generator
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
 
-        <h3>Themes & Notes</h3>
-        <ul>
-          <li>Virtual reality, identity, and the ethics of online worlds</li>
-          <li>Survival, trauma and found-family bonds</li>
-          <li>Blends fast-paced action with romance and character growth</li>
-        </ul>
+    const size = 20 + Math.random() * 30;
+    heart.style.fontSize = size + "px";
 
-        <h3>Key Characters</h3>
-        <p><strong>Kirito</strong> — protagonist; solo player & skilled swordsman. <strong>Asuna</strong> — ally, love interest, skilled fighter.</p>
-      </div>
-    </article>
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+    heart.style.opacity = (0.6 + Math.random() * 0.4).toString();
 
-    <!-- CARD: A Silent Voice -->
-    <article class="card" aria-labelledby="asv-title">
-      <div class="card-media">
-        <img src="images/SV.jpg" alt="A Silent Voice poster: Shouya and Shouko" class="poster">
-      </div>
-      <div class="card-body">
-        <h2 id="asv-title" class="card-title">
-        <a href="https://aniwatchtv.to/a-silent-voice-11?ref=search" target="_blank">A Silent Voice (Koe no Katachi)</a></h2>
-        <p class="meta"><strong>Year:</strong> 2016 (film) · <strong>Genres:</strong> Drama, Slice of Life</p>
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 9000);
+}
 
-        <h3>Synopsis</h3>
-        <p>
-          After bullying a deaf girl named Shouko, former elementary school student Shouya faces social ostracization.
-          Years later he seeks redemption by reconnecting and attempting to atone for his actions. The film is an intimate study of guilt, communication, and forgiveness.
-        </p>
+// Generate hearts continuously
+setInterval(createHeart, 300);
+</script>
 
-        <h3>Themes & Notes</h3>
-        <ul>
-          <li>Bullying, mental health, empathy and redemption</li>
-          <li>Powerful, quiet storytelling with emotional realism</li>
-          <li>Beautiful art direction and nuanced performances</li>
-        </ul>
-
-        <h3>Key Characters</h3>
-        <p><strong>Shouya Ishida</strong> — troubled youth seeking forgiveness. <strong>Shouko Nishimiya</strong> — deaf classmate, gentle and resilient.</p>
-      </div>
-    </article>
-
-    <!-- CARD: I Want to Eat Your Pancreas -->
-    <article class="card" aria-labelledby="iwy-title">
-      <div class="card-media">
-        <img src="images/SP.avif" alt="I Want to Eat Your Pancreas poster: Sakura and Haruki" class="poster">
-      </div>
-      <div class="card-body">
-        <h2 id="iwy-title" class="card-title">
-        <a href="https://aniwatchtv.to/i-want-to-eat-your-pancreas-70?ref=search" target="_blank">I Want to Eat Your Pancreas</a></h2>
-        <p class="meta"><strong>Year:</strong> 2018 (film) · <strong>Genres:</strong> Romance, Drama</p>
-
-        <h3>Synopsis</h3>
-        <p>
-          A reserved high-school boy discovers a classmate's secret: she is terminally ill.
-          They form an unlikely bond as he becomes deeply involved in her remaining days.
-          The story explores mortality, intimacy, memory and the quiet beauty of shared time.
-        </p>
-
-        <h3>Themes & Notes</h3>
-        <ul>
-          <li>Life & death, cherishing small moments, emotional honesty</li>
-          <li>Bittersweet romance with strong character-driven scenes</li>
-          <li>Melancholic soundtrack and heartfelt visuals</li>
-        </ul>
-
-        <h3>Key Characters</h3>
-        <p><strong>Sakura Yamauchi</strong> — lively, terminally ill girl. <strong>Haruki Shiga</strong> — introspective narrator and classmate.</p>
-      </div>
-    </article>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <p>Built with ♥ for anime lovers • Designed by <strong>Timon Limbu</strong> • © 2025</p>
-    </div>
-  </footer>
 </body>
 </html>
